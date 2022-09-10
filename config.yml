@@ -5,3 +5,4 @@ pipeline:
   - name: DIETClassifier
     epochs: 200
     random_seed: 2
+  - name: EntitySynonymMapper

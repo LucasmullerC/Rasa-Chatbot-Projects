@@ -20,8 +20,11 @@ nlu:
       - Can you recommend me a [laptop](category)
       - give me some recommendations for [mobile phones](category)
       - Can you suggest a [laptop](category)
-      - I wanna buy a [phone](category)
+      - I wanna buy a [mobile](category)
       - Im interested in purchasing a [phone](category)
+      - I wanted to buy a [refrigerator](category)
+      - show me a good [air conditioner](category)
+      - please recommend me a [washing machine](category)
 
   - intent: latest_news_phones_laptops
     examples: |
@@ -32,6 +35,11 @@ nlu:
       - any new releases for [mobiles](category), whats the news
       - update me on the [mobile](category) news
       - show me the latest news for [mobiles](category)
+
+  - synonym: phone
+    examples: |
+      - mobile
+      - mobiles
 
   - intent: goodbye
     examples: |

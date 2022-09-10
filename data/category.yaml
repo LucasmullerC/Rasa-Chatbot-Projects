@@ -1,0 +1,6 @@
+nlu:
+  - lookup: category
+    examples: |
+      - refrigerator
+      - washing machine
+      - air conditioner
