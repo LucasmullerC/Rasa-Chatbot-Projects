@@ -1,6 +1,8 @@
 language: en
 pipeline:
-  - name: WhitespaceTokenizer
+  - name: SpacyNLP
+    model: external_data/output
+  - name: SpacyTokenizer
   - name: CountVectorsFeaturizer
   - name: DIETClassifier
     epochs: 200

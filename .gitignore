@@ -9,6 +9,9 @@
 *.sass-cache
 *build/
 *dat
+*.txt
+*.gz
+/external_data/output
 .env
 venv
 .pytest_cache/
