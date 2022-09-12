@@ -7,9 +7,27 @@ intents:
 
 entities:
   - category
-  - ram
+  - RAM
   - battery
   - camera
+
+slots:
+  category:
+    type: text
+    mappings:
+      - type: custom
+  RAM:
+    type: text
+    mappings:
+      - type: custom
+  battery:
+    type: text
+    mappings:
+      - type: custom
+  camera:
+    type: text
+    mappings:
+      - type: custom
 
 responses:
   utter_how_can_i_help:
@@ -22,6 +40,8 @@ responses:
     - text: How much battery capacity are you looking for in the mobile?
   utter_goodbye:
     - text: It was nice talking to you! Godbye!
+  utter_iamabot:
+    - text: I'm a bot!
 
 actions:
   - utter_how_can_i_help
