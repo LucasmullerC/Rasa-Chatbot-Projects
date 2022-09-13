@@ -33,13 +33,26 @@ nlu:
 
   - intent: latest_news_phones_laptops
     examples: |
-      - Whats the latest news with [phones](category)
-      - Can you tell me about the trens regarding [phones](category)
-      - Whats going in the tech world for [laptops](category)
-      - Can you show me the trends in [laptops](category)
-      - any new releases for [mobiles](category), whats the news
-      - update me on the [mobile](category) news
-      - show me the latest news for [mobiles](category)
+      - Whats the latest news with [phone](category)
+      - Can you tell me about the trens regarding [phone](category)
+      - Whats going in the tech world for [laptop](category)
+      - Can you show me the trends in [laptop](category)
+      - any new releases for [phone](category), whats the news
+      - update me on the [phone](category) news
+      - show me the latest news for [phone](category)
+
+  - intent: out_of_scope
+    examples: |
+      - blablablabla
+      - assasadsadsasad
+      - hmmmmmmmmmmmmm
+      - hahaha
+      - ...
+      - where are you
+      - what do you
+      - what else can you do
+      - whats the weather update
+      - im sleeping
 
   - synonym: phone
     examples: |

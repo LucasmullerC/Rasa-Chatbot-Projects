@@ -5,9 +5,11 @@ pipeline:
   - name: SpacyTokenizer
   - name: CountVectorsFeaturizer
   - name: DIETClassifier
-    epochs: 70
+    epochs: 200
     random_seed: 2
   - name: EntitySynonymMapper
+  - name: FallbackClassifier
+    threshold: 0.4
 
 policies:
   - name: MemoizationPolicy
@@ -18,3 +20,6 @@ policies:
     random_seed: 5
     validation_split: 0.2
   - name: RulePolicy
+    core_fallback_threshold: 0.4
+    core_fallback_action_name: "action_my_fallback"
+    enable_fallback_prediction: false

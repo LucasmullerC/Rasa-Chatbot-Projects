@@ -33,3 +33,8 @@ stories:
       - action: action_show_latest_news
       - intent: goodbye
       - action: utter_goodbye
+
+  - story: out_of_scope_intent
+    steps:
+      - intent: out_of_scope
+      - action: action_my_fallback
