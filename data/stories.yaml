@@ -7,15 +7,15 @@ stories:
         entities:
           - category: "phone"
       - action: utter_ask_ram
-      - intent: give_information
+      - intent: give_information_RAM
         entities:
           - RAM: "4 GB"
       - action: utter_ask_camera
-      - intent: give_information
+      - intent: give_information_camera
         entities:
           - camera: "40 megapixel"
       - action: utter_ask_battery
-      - intent: give_information
+      - intent: give_information_battery
         entities:
           - battery: "3000 mah"
       - action: action_search

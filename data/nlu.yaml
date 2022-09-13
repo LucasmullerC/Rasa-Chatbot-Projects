@@ -51,15 +51,21 @@ nlu:
       - talk to you later
       - see you around
 
-  - intent: give_information
+  - intent: give_information_RAM
     examples: |
       - I'm looking for [8 GB RAM](RAM)
       - I would like [10 GB RAM](RAM)
+      - around [16 GB](RAM)
+      - [8 GB](RAM)
+
+  - intent: give_information_camera
+    examples: |
       - I want a camera of [65 megapixels](camera)
       - I'm looking for [15 megapixel](camera)
       - [25 megapixels](camera)
+      - Well around [50 megapixel](camera)
+
+  - intent: give_information_battery
+    examples: |
       - I was looking for [4000 mah](battery) battery backup
       - [3500 mah](battery)
-      - around [16 GB](RAM)
-      - [8 GB](RAM)
-      - Well around [50 megapixel](camera)

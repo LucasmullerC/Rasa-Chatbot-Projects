@@ -2,7 +2,9 @@ intents:
   - greet
   - buy_phone_laptop
   - latest_news_phones_laptop
-  - give_information
+  - give_information_RAM
+  - give_information_camera
+  - give_information_battery
   - goodbye
 
 entities:
@@ -14,20 +16,28 @@ entities:
 slots:
   category:
     type: text
+    influence_conversation: false #Se ele deve mudar o comportamento caso tenha uma resposta não esperada
     mappings:
-      - type: custom
+      - type: from_text
+        intent: buy_phone_laptop
   RAM:
     type: text
+    influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_text
+        intent: give_information_RAM
   battery:
     type: text
+    influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_text
+        intent: give_information_battery
   camera:
     type: text
+    influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_text
+        intent: give_information_camera
 
 responses:
   utter_how_can_i_help:
