@@ -1,10 +1,13 @@
 intents:
   - greet
-  - buy_phone_laptop
+  - buy_phone
+  - buy_laptop
   - latest_news_phones_laptop
   - give_information_RAM
   - give_information_camera
   - give_information_battery
+  - give_information_storage_capacity
+  - budget_available
   - goodbye
 
 entities:
@@ -12,14 +15,17 @@ entities:
   - RAM
   - battery
   - camera
+  - battery_backup
+  - storage_capacity
+  - budget
 
 slots:
-  category:
+  budget:
     type: text
-    influence_conversation: false #Se ele deve mudar o comportamento caso tenha uma resposta não esperada
+    influence_conversation: false
     mappings:
       - type: from_text
-        intent: buy_phone_laptop
+        intent: budget_available
   RAM:
     type: text
     influence_conversation: false
@@ -38,16 +44,48 @@ slots:
     mappings:
       - type: from_text
         intent: give_information_camera
+  battery_backup:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        intent: give_information_battery
+  storage_capacity:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        intent: give_information_storage_capacity
+
+forms:
+  phone_search_form:
+    required_slots:
+      - RAM
+      - camera
+      - battery
+      - budget
+  laptop_search_form:
+    required_slots:
+      - RAM
+      - storage_capacity
+      - battery_backup
+      - budget
 
 responses:
   utter_how_can_i_help:
     - text: Welcome. I'm your shopping bot. I can help you with finding a phone or laptop and providing latest news for them!
-  utter_ask_ram:
+  utter_ask_RAM:
     - text: How much GB RAM are you looking for?
   utter_ask_camera:
     - text: What megapixel camera are you looking for?
   utter_ask_battery:
     - text: How much battery capacity are you looking for in the mobile?
+  utter_ask_budget:
+    - text: Whats your budget?
+  utter_ask_battery_backup:
+    - text: Whats the minimum battery backup you are looking at?
+  utter_ask_storage_capacity:
+    - text: Whats the storage capacity you are looking for?
   utter_goodbye:
     - text: It was nice talking to you! Godbye!
   utter_iamabot:
@@ -55,12 +93,17 @@ responses:
 
 actions:
   - utter_how_can_i_help
-  - utter_ask_ram
+  - utter_ask_RAM
   - utter_ask_camera
   - utter_ask_battery
+  - utter_ask_budget
+  - utter_ask_battery_backup
+  - utter_ask_storage_capacity
   - utter_goodbye
   - action_search
   - action_show_latest_news
+  - validate_phone_search_form
+  - validate_laptop_search_form
 
 session_config:
   session_expiration_time: 60.0

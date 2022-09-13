@@ -3,22 +3,23 @@ stories:
     steps:
       - intent: greet
       - action: utter_how_can_i_help
-      - intent: buy_phone_laptop
+      - intent: buy_phone
         entities:
           - category: "phone"
-      - action: utter_ask_ram
-      - intent: give_information_RAM
+      - action: phone_search_form
+      - active_loop: phone_search_form
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: greet + show_laptops
+    steps:
+      - intent: greet
+      - action: utter_how_can_i_help
+      - intent: buy_laptop
         entities:
-          - RAM: "4 GB"
-      - action: utter_ask_camera
-      - intent: give_information_camera
-        entities:
-          - camera: "40 megapixel"
-      - action: utter_ask_battery
-      - intent: give_information_battery
-        entities:
-          - battery: "3000 mah"
-      - action: action_search
+          - category: "laptop"
+      - action: laptop_search_form
+      - active_loop: laptop_search_form
       - intent: goodbye
       - action: utter_goodbye
 
