@@ -29,12 +29,12 @@ stories:
       - action: utter_how_can_i_help
       - intent: latest_news_phones_laptops
         entities:
-          - category: "phone"
+          - category: "news"
       - action: action_show_latest_news
       - intent: goodbye
       - action: utter_goodbye
 
-  - story: out_of_scope_intent
+  - story: ask residence
     steps:
-      - intent: out_of_scope
-      - action: action_my_fallback
+      - intent: ask_residence
+      - action: action_your_residence

@@ -2,49 +2,9 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk import FormValidationAction
-from rasa_sdk.events import SlotSet
+from rasa_sdk.events import FollowupAction
 
 import re
-
-class ActionSearch(Action):
-
-    def name(self) -> Text:
-        return "action_search"
-
-    def run(self, dispatcher: CollectingDispatcher, 
-        tracker: Tracker,
-        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        camera = tracker.get_slot('camera')
-        ram = tracker.get_slot('RAM')
-        battery = tracker.get_slot('battery')
-        print(str(camera)+","+str(ram)+","+str(battery))
-        dispatcher.utter_message(text='Here are your search results')
-        dispatcher.utter_message(text='The features you entered: '+str(camera)+","+str(ram)+","+str(battery))
-        return []
-
-class ActionShowLatestNews(Action):
-
-    def name(self) -> Text:
-        return "action_show_latest_news"
-
-    def run(self, dispatcher: CollectingDispatcher, 
-        tracker: Tracker,
-        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(text='Here the latest news for your category')
-        dispatcher.utter_message(response='utter_select_next')
-        return []
-
-class MyFallback(Action):
-
-    def name(self) -> Text:
-        return "action_my_fallback"
-
-    def run(self, dispatcher: CollectingDispatcher, 
-        tracker: Tracker,
-        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(response = "utter_fallback")
-        return []
 
 class ValidatePhoneSearchForm(FormValidationAction):
     def name(self) -> Text:
@@ -174,4 +134,55 @@ class ValidateLaptopSearchForm(FormValidationAction):
         else:
             dispatcher.utter_message(text="Please enter the correct storage capacity in GBs")
             return {"storage_capacity":None}
+
+class ActionSearch(Action):
+
+    def name(self) -> Text:
+        return "action_search"
+
+    def run(self, dispatcher: CollectingDispatcher, 
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        camera = tracker.get_slot('camera')
+        ram = tracker.get_slot('RAM')
+        battery = tracker.get_slot('battery')
+        print(str(camera)+","+str(ram)+","+str(battery))
+        dispatcher.utter_message(text='Here are your search results')
+        dispatcher.utter_message(text='The features you entered: '+str(camera)+","+str(ram)+","+str(battery))
+        return []
+
+class ActionShowLatestNews(Action):
+
+    def name(self) -> Text:
+        return "action_show_latest_news"
+
+    def run(self, dispatcher: CollectingDispatcher, 
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text='Here the latest news for your category')
+        dispatcher.utter_message(response='utter_select_next')
+        return []
+
+class MyFallback(Action):
+
+    def name(self) -> Text:
+        return "action_my_fallback"
+
+    def run(self, dispatcher: CollectingDispatcher, 
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(response = "utter_fallback")
+        return []
+
+class YourResidence(Action):
+
+    def name(self) -> Text:
+        return "action_your_residence"
+
+    def run(self, dispatcher: CollectingDispatcher, 
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(response = "utter_residence")
+        return [FollowupAction(tracker.active_loop.get('name'))]
     

@@ -30,29 +30,32 @@ nlu:
       - Can you suggest a [laptop](category)
       - I wanted to buy a [laptop](category)
       - show me a good [laptop](category)
+      - I wanna buy a laptop
 
   - intent: latest_news_phones_laptops
     examples: |
-      - Whats the latest news with [phone](category)
-      - Can you tell me about the trens regarding [phone](category)
-      - Whats going in the tech world for [laptop](category)
-      - Can you show me the trends in [laptop](category)
-      - any new releases for [phone](category), whats the news
-      - update me on the [phone](category) news
-      - show me the latest news for [phone](category)
+      - Whats the latest [news](category) with phones
+      - Can you tell me about the trens regarding [phone_news](category)
+      - Whats going in the tech world
+      - Can you show me the trends in [laptop_news](category)
+      - any new releases for [phone_news](category), whats the [news](category)
+      - update me on the [news](category)
+      - show me the latest [news](category) for [phone_news](category)
 
-  - intent: out_of_scope
+  - intent: ask_residence
     examples: |
-      - blablablabla
-      - assasadsadsasad
-      - hmmmmmmmmmmmmm
-      - hahaha
-      - ...
-      - where are you
-      - what do you
-      - what else can you do
-      - whats the weather update
-      - im sleeping
+      - where do you live
+      - in which city do you live
+      - whats your residence
+      - wheres your house
+      - your city
+      - your town
+      - whats your hometown
+      - where do you stay
+      - where's your residence
+      - what is your city
+      - where are you staying
+      - wer do u stay
 
   - synonym: phone
     examples: |
@@ -69,7 +72,7 @@ nlu:
       - talk to you later
       - see you around
 
-  - intent: give_information_RAM
+  - intent: give_information
     examples: |
       - I'm looking for [8 GB RAM](RAM)
       - I would like [10 GB RAM](RAM)
@@ -77,54 +80,39 @@ nlu:
       - [8 GB](RAM)
       - around [8 GB RAM](ram)
       - [4 GB RAM](RAM)
-
-  - intent: give_information_camera
-    examples: |
       - I want a camera of [65 megapixels](camera)
       - I'm looking for [15 megapixel](camera)
       - [25 megapixels](camera)
       - Well around [50 megapixel](camera)
       - A camera of [40 mp](camera)
       - Well I would like [25 mp](camera) camera
-
-  - intent: give_information_battery
-    examples: |
       - I was looking for [4000 mah](battery) battery backup
       - [3500 mah](battery)
       - [5000 mah](battery)
       - [3000 mah](battery)
       - I want [3500 mah](battery)
-      - I am looking for [5000 mah](battery)  battery
+      - I am looking for [5000 mah](battery) battery
       - Well the battery should be [4300 mah](battery)
-      - 8 hours
-      - 8
-      - 7 hours
-      - 10 hours
-
-  - intent: give_information_storage_capacity
-    examples: |
-      - I was looking for 250 GB storage
-      - 500 GB
-      - 500
-      - 850
-      - 2
-      - 1
-      - 256
-      - 1 TB
-      - 850 GB
-      - I want 1 TB storage
-      - I am looking for 500 GB storage
-      - Well I would like a 1 TB storage
-
-  - intent: budget_available
-    examples: |
-      - my budget is around 400 usd
-      - Well I can spend around 300 usd
-      - my total spending on the phone can be 250 usd
-      - I can shell out approx 450 usd
-      - well its around 500 usd
-      - 800
-      - 500
-      - 250
-      - 350
-      - 760
+      - [8 hours](battery_backup)
+      - [7 hours](battery_backup)
+      - [10 hours](battery_backup)
+      - I was looking for [250 GB](storage_capacity)
+      - [500 GB](storage_capacity)
+      - [500](storage_capacity)
+      - [850](storage_capacity)
+      - [256 GB](storage_capacity)
+      - [1 TB](storage_capacity)
+      - [850 GB](storage_capacity)
+      - I want [1 TB](storage_capacity) storage
+      - I am looking for [500 GB](storage_capacity) storage
+      - Well I would like a [1 TB](storage_capacity) storage
+      - my budget is around [400 usd](budget)
+      - Well I can spend around [300 usd](budget)
+      - my total spending on the phone can be [250 usd](budget)
+      - I can shell out approx [450 usd](budget)
+      - well its around [500 usd](budget)
+      - [800 usd](budget)
+      - [500 dollars](budget)
+      - [250 usd](budget)
+      - [350 usd](budget)
+      - [760 dollars](budget)

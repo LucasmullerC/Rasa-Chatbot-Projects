@@ -2,13 +2,11 @@ intents:
   - greet
   - buy_phone
   - buy_laptop
-  - latest_news_phones_laptop
-  - give_information_RAM
-  - give_information_camera
-  - give_information_battery
-  - give_information_storage_capacity
+  - latest_news_phones_laptops
+  - give_information
   - out_of_scope
   - budget_available
+  - ask_residence
   - goodbye
 
 entities:
@@ -21,47 +19,42 @@ entities:
   - budget
 
 slots:
-  category:
-    type: text
-    mappings:
-      - type: from_text
-        intent: greet
   budget:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
-        intent: budget_available
+      - type: from_entity
+        entity: budget
   RAM:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
-        intent: give_information_RAM
+      - type: from_entity
+        entity: RAM
   battery:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
-        intent: give_information_battery
+      - type: from_entity
+        entity: battery
   camera:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
-        intent: give_information_camera
+      - type: from_entity
+        entity: camera
   battery_backup:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
-        intent: give_information_battery
+      - type: from_entity
+        entity: battery_backup
   storage_capacity:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_text
-        intent: give_information_storage_capacity
+      - type: from_entity
+        entity: storage_capacity
 
 forms:
   phone_search_form:
@@ -96,6 +89,10 @@ responses:
     - text: It was nice talking to you! Godbye!
   utter_iamabot:
     - text: I'm a bot!
+  utter_residence:
+    - text: I live in this app all day long.
+    - text: The virtual world is my playground. I'm always here.
+    - text: Right here in this app. Whenever you need me.
   utter_fallback:
     - text: Sorry! I couldn't get you! Please use one of the following options.
       buttons:
@@ -134,8 +131,10 @@ actions:
   - utter_goodbye
   - utter_fallback
   - utter_select_next
+  - utter_residence
   - action_my_fallback
   - action_show_latest_news
+  - action_your_residence
   - validate_phone_search_form
   - validate_laptop_search_form
 
