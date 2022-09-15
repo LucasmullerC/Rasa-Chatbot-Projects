@@ -11,6 +11,7 @@
 *dat
 *.txt
 *.gz
+credentials.yml
 /external_data/output
 .env
 venv
