@@ -5,6 +5,12 @@ from rasa_sdk import FormValidationAction
 from rasa_sdk.events import FollowupAction
 
 import re
+import MySQLdb
+
+hostname = "db4free.net"
+username = "rasa_shopping_db"
+password = "password12"
+database = "shopping_db"
 
 class ValidatePhoneSearchForm(FormValidationAction):
     def name(self) -> Text:
@@ -18,6 +24,7 @@ class ValidatePhoneSearchForm(FormValidationAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         ram_int = int(re.findall(r'[0-9]+',value)[0])
+        
         if ram_int < 50:
             return {"RAM":ram_int}
         else:
@@ -49,7 +56,6 @@ class ValidatePhoneSearchForm(FormValidationAction):
         
         budget_int = int(re.findall(r'[0-9]+',value)[0])
         if budget_int < 4000:
-            dispatcher.utter_message(text="Please find your searched items here..")
             return {"budget":budget_int}
         else:
             dispatcher.utter_message(text="Please enter the budget in USD and below 4000.")
@@ -104,22 +110,6 @@ class ValidateLaptopSearchForm(FormValidationAction):
             dispatcher.utter_message(text="Please enter the correct value for battery backup.")
             return {"battery_backup":None}
 
-    def validate_budget(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> Dict[Text, Any]:
-        
-        budget_int = int(re.findall(r'[0-9]+',value)[0])
-        if budget_int < 4000:
-            dispatcher.utter_message(text="Please find your searched items here..")
-            return {"budget":budget_int}
-        else:
-            dispatcher.utter_message(text="Please enter the budget in USD and below 4000.")
-            return {"budget":None}
-
     def validate_storage_capacity(
         self,
         value: Text,
@@ -134,6 +124,79 @@ class ValidateLaptopSearchForm(FormValidationAction):
         else:
             dispatcher.utter_message(text="Please enter the correct storage capacity in GBs")
             return {"storage_capacity":None}
+
+    def validate_budget(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+    
+        budget_int = int(re.findall(r'[0-9]+',value)[0])
+        if budget_int < 4000:
+            return {"budget":budget_int}
+        else:
+            dispatcher.utter_message(text="Please enter the budget in USD and below 4000.")
+            return {"budget":None}
+
+class FindItemsLaptop(Action):
+
+    def name(self) -> Text:
+        return "action_find_laptop"
+
+    def run(self, dispatcher: CollectingDispatcher, 
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        db = MySQLdb.connect(hostname,username,password,database)
+        ram = tracker.get_slot('RAM')
+        storage_capacity = tracker.get_slot('storage_capacity')
+        battery_backup = tracker.get_slot('battery_backup')
+        budget = tracker.get_slot('budget')
+
+        cursor = db.cursor()
+        cursor.execute("SELECT product_url FROM products WHERE ram >= %s AND storage >= %s AND battery_backup >= %s AND price_usd <= %s AND category= %s", [int(ram), int(storage_capacity), int(battery_backup), int(budget), 'laptop'])
+
+        products = cursor.fetchall()
+
+        if len(products) != 0:
+            dispatcher.utter_message(text='Please find your searched items here:')
+            for x in products:
+                dispatcher.utter_message(text=x[0])
+        else:
+            dispatcher.utter_message(text="Looks like there aren't any products that math your search.")
+
+        return []
+
+class FindItemsPhone(Action):
+
+    def name(self) -> Text:
+        return "action_find_phone"
+
+    def run(self, dispatcher: CollectingDispatcher, 
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        db = MySQLdb.connect(hostname,username,password,database)
+        ram = tracker.get_slot('RAM')
+        camera = tracker.get_slot('camera')
+        battery = tracker.get_slot('battery')
+        budget = tracker.get_slot('budget')
+
+        cursor = db.cursor()
+        cursor.execute("SELECT product_url FROM products WHERE ram >= %s AND back_camera_megapixel >= %s AND battery_mah >= %s AND price_usd <= %s AND category= %s", [int(ram), int(camera), int(battery), int(budget), 'phone'])
+
+        products = cursor.fetchall()
+
+        if len(products) != 0:
+            dispatcher.utter_message(text='Please find your searched items here:')
+            for x in products:
+                dispatcher.utter_message(text=x[0])
+        else:
+            dispatcher.utter_message(text="Looks like there aren't any products that math your search.")
+
+        return []
 
 class ActionSearch(Action):
 
@@ -160,7 +223,20 @@ class ActionShowLatestNews(Action):
     def run(self, dispatcher: CollectingDispatcher, 
         tracker: Tracker,
         domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(text='Here the latest news for your category')
+
+        db = MySQLdb.connect(hostname,username,password,database)
+        cursor = db.cursor()
+        cursor.execute("SELECT blog_url FROM news WHERE category=%s LIMIT 3",['phone'])
+        
+        news = cursor.fetchall()
+
+        if len(news) != 0:
+            dispatcher.utter_message(text='Here the latest news for your category')
+            for x in news:
+                dispatcher.utter_message(text=x[0])
+        else:
+            dispatcher.utter_message(text="Looks like there isnt any news available.")
+
         dispatcher.utter_message(response='utter_select_next')
         return []
 

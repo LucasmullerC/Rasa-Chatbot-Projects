@@ -93,6 +93,8 @@ nlu:
       - I want [3500 mah](battery)
       - I am looking for [5000 mah](battery) battery
       - Well the battery should be [4300 mah](battery)
+      - [3000](battery)
+      - [4000](battery)
       - [8 hours](battery_backup)
       - [7 hours](battery_backup)
       - [10 hours](battery_backup)

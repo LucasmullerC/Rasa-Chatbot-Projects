@@ -135,6 +135,8 @@ actions:
   - action_my_fallback
   - action_show_latest_news
   - action_your_residence
+  - action_find_laptop
+  - action_find_phone
   - validate_phone_search_form
   - validate_laptop_search_form
 

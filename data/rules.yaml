@@ -8,3 +8,29 @@ rules:
     steps:
       - intent: bot_challenge
       - action: utter_iamabot
+
+  - rule: Submit form laptop
+    condition:
+      # Condition that form is active.
+      - active_loop: laptop_search_form
+    steps:
+      # Form is deactivated
+      - action: laptop_search_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      # The actions we want to run when the form is submitted.
+      - action: action_find_laptop
+
+  - rule: Submit form phone
+    condition:
+      # Condition that form is active.
+      - active_loop: phone_search_form
+    steps:
+      # Form is deactivated
+      - action: phone_search_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      # The actions we want to run when the form is submitted.
+      - action: action_find_phone
